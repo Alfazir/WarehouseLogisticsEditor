@@ -1,12 +1,22 @@
-﻿<?xml version="1.0" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="WarehouseLogisticsEditor">
   <BOModel>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+    <Class Name="WarehouseLogisticsEditor.Module.BusinessObjects.WrehouseArea">
+      <OwnMembers>
+        <Member Name="AreaName" LookupEditorMode="AllItems" />
+      </OwnMembers>
+    </Class>
   </BOModel>
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="22.1.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="22.1.6.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <ListView Id="WrehouseArea_ListView" AllowEdit="True" />
   </Views>
 </Application>
