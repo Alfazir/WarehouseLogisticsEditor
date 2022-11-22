@@ -1,6 +1,8 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor;
+using DevExpress.ExpressApp.Dashboards;
+using DevExpress.ExpressApp.Dashboards.Blazor;
 using DevExpress.ExpressApp.Security;
 using DevExpress.ExpressApp.Security.ClientServer;
 using DevExpress.ExpressApp.SystemModule;
@@ -14,6 +16,8 @@ public class WarehouseLogisticsEditorBlazorApplication : BlazorApplication {
         ApplicationName = "WarehouseLogisticsEditor";
         CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
         DatabaseVersionMismatch += WarehouseLogisticsEditorBlazorApplication_DatabaseVersionMismatch;
+      //  Modules.Add(new DashboardsModule() { });
+     //   Modules.Add(new DashboardsBlazorModule());
     }
     protected override void OnSetupStarted() {
         base.OnSetupStarted();

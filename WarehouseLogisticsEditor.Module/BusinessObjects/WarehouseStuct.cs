@@ -7,18 +7,22 @@ using System.Threading.Tasks;
 using DevExpress.CodeParser;
 using DevExpress.DashboardCommon;
 using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp.Model;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.StateMachine.Utils;
 using DevExpress.Pdf.Native.BouncyCastle.Asn1.Cms;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.PivotGrid.Criteria.Validation;
 using DevExpress.Xpo;
+using DevExpress.Persistent.Validation;
 
 namespace WarehouseLogisticsEditor.Module.BusinessObjects
 {
 
     #region Склад
     [NavigationItem("WarehouseEditor")]
+    [DefaultClassOptions]
     public class Warehouse : BaseObject
 
     {
@@ -58,9 +62,9 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
 
+        
 
-
-        [Association("Warehouse-WrehouseAreas")]
+       [Association("Warehouse-WrehouseAreas")]
         public XPCollection<WrehouseArea> WrehouseAreas                      // коллекция зарегистрированных на складе площадок
         {
             get { return GetCollection<WrehouseArea>(nameof(WrehouseAreas)); }
@@ -68,7 +72,6 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
         [Association("Warehouse-WrehousePegs")] //, Aggregated, ExpandObjectMembers(ExpandObjectMembers.Never)]
-
 
         public XPCollection<WrehousePeg> WrehousePegs                      // коллекция зарегистрированных на складе пикетов
         {
@@ -85,12 +88,16 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     #region Площадка склада
 
     [NavigationItem("WarehouseEditor")]
+    [DefaultClassOptions]
+    [RuleCriteria("Pegs.Count()-1 = Pegs.Max([PegNumber])-Pegs.Min([PegNumber])")]
+
+
     public class WrehouseArea : BaseObject              //
     {
 
         public WrehouseArea(Session session) : base(session)
         {
-            createdOn = DateTime.Now;                             //HACK установка даты (поменять алгоритм вычисления даты)
+           // createdOn = DateTime.Now;                             //HACK установка даты (поменять алгоритм вычисления даты)
 
         }
         string areaName;
@@ -109,15 +116,22 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             get { return cargoOnArea; }
             set { SetPropertyValue(nameof(CargoOnArea), ref cargoOnArea, value); }
         }
-
+        DateTime createdOn; //HACK дата создания площадки.
         // [VisibleInListView(false)]
         public DateTime CreatedOn
         {
             get { return createdOn; }
             internal set { SetPropertyValue(nameof(CreatedOn), ref createdOn, value); }
         }
-        DateTime createdOn; //HACK дата создания площадки.
+        
+
         DateTime deleteOn;  //HACK дата удаления площадки.
+        public DateTime DeleteOn
+        {
+            get { return deleteOn; }
+             set { SetPropertyValue(nameof(DeleteOn), ref deleteOn, value); }
+        }
+
 
         Warehouse warehouse;                         // ссылка на склад
         [Association("Warehouse-WrehouseAreas")]
@@ -139,12 +153,14 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         [Association("WrehouseArea-WrehousePegs")]
         [DataSourceProperty(nameof(AvailablePegs))]
+      //  [RuleValueComparison("RuleWithAggregateFunction", (DefaultContexts)ValueComparisonType.Equals, 0, DefaultContexts.Save, TargetPropertyName = nameof(WrehousePeg.PegNumber), TargetCollectionAggregate= Aggregate.Sum)]
         public XPCollection<WrehousePeg> Pegs
         {
-            get { 
+            get
+            {
 
                 return GetCollection<WrehousePeg>(nameof(Pegs));
-            } 
+            }
         }
 
 
@@ -176,9 +192,9 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
                 return;
             if (Warehouse != null)
             {
-                
+
                 string tt = this.Warehouse.Oid.ToString();
-               // availablePegs.Criteria = CriteriaOperator.Parse("[Warehouse] == {8ba50e7a-ea71-41cc-87f1-e8ebfc228c73}");
+                // availablePegs.Criteria = CriteriaOperator.Parse("[Warehouse] == {8ba50e7a-ea71-41cc-87f1-e8ebfc228c73}");
                 //availablePegs.Criteria = CriteriaOperator.Parse($"[Warehouse] == {tt}");
                 availablePegs.Criteria = CriteriaOperator.FromLambda<WrehousePeg>(p => p.Warehouse.Oid == Warehouse.Oid);
                 //  availablePegs = availablePegs.Where(p=> p.Warehouse = Warehouse.Oid) ;
@@ -191,14 +207,29 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         }
 
-        public override void AfterConstruction()  {               // установка значения по умолчанию 
+        public override void AfterConstruction()
+        {               // установка значения по умолчанию 
             base.AfterConstruction();
             Warehouse = new Warehouse(Session);
-            Warehouse = Session.FindObject<Warehouse>(CriteriaOperator.FromLambda<Warehouse>(p=>p.WarehouseNumber>=0));
-        
-        
+            Warehouse = Session.FindObject<Warehouse>(CriteriaOperator.FromLambda<Warehouse>(p => p.WarehouseNumber >= 0));
+
+
         }
 
+        private XPCollection<AuditDataItemPersistent> auditTrail;
+        [CollectionOperationSet(AllowAdd = false, AllowRemove = false)]
+        public XPCollection<AuditDataItemPersistent> AuditTrail
+        {
+            get
+            {
+                if (auditTrail == null)
+                {
+                    auditTrail = AuditedObjectWeakReference.GetAuditTrail(Session, this);
+                }
+                return auditTrail;
+            }
+
+        }
     }
 
     #endregion
@@ -240,4 +271,9 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     }
 
     #endregion
+
+
+   
 }
+
+
