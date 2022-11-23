@@ -1151,7 +1151,6 @@
         <PropertyEditor Id="LoadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
         <PropertyEditor Id="UnloadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="WarehouseArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" ToolTip="" ToolTipTitle="">
@@ -1159,7 +1158,6 @@
             <LayoutGroup Id="CargoOnArea" ToolTip="" ToolTipTitle="">
               <LayoutItem Id="LoadedOn" ToolTipTitle="" />
               <LayoutItem Id="UnloadedOn" ToolTipTitle="" />
-              <LayoutItem Id="WarehouseArea" ToolTipTitle="" />
             </LayoutGroup>
           </LayoutGroup>
         </LayoutGroup>

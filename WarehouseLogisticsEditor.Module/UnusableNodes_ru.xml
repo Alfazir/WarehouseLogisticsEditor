@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="CargoOnArea_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="WarehouseArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+      </Items>
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="CargoOnArea">
+              <LayoutItem Id="WarehouseArea" ToolTipTitle="" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

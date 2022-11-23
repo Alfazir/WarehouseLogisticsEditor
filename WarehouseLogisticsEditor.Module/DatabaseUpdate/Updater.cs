@@ -20,6 +20,11 @@ public class Updater : ModuleUpdater {
     }
     public override void UpdateDatabaseAfterUpdateSchema() {
         base.UpdateDatabaseAfterUpdateSchema();
+        Warehouse warehouse = ObjectSpace.FirstOrDefault<Warehouse>(warehouse => warehouse.WarehouseName == "Склад №1" & warehouse.WarehouseNumber == 1);
+
+
+
+
         //string name = "MyName";
         //DomainObject1 theObject = ObjectSpace.FirstOrDefault<DomainObject1>(u => u.Name == name);
         //if(theObject == null) {

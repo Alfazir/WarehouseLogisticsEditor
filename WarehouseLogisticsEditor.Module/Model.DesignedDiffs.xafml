@@ -3,7 +3,36 @@
   <BOModel>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
   </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Reports" Visible="False">
+        <Items>
+          <Item Id="Analysis_ListView" Visible="False" />
+          <Item Id="Dashboards" Removed="True">
+            <Items Index="" />
+          </Item>
+          <Item Id="ReportsV2" Visible="False" />
+        </Items>
+      </Item>
+      <Item Id="WarehouseEditor">
+        <Items>
+          <Item Id="Dashboards" ObjectKey="" ViewId="DashboardData_ListView" Visible="True" IsNewNode="True">
+            <Items Index="" IsNewNode="True" />
+          </Item>
+          <Item Id="Warehouse_ListView" Removed="True" />
+          <Item Id="WarehouseArea_ListView">
+            <Items>
+              <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" IsNewNode="True" />
+              <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Options>
+    <Dashboards EnableCreation="True" />
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
   <SchemaModules>

@@ -125,7 +125,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
               set { SetPropertyValue(nameof(CargoOnArea), ref cargoOnArea, value); }
           }*/
 
-        [Association("WarehouseArea-CargoOnArea")]
+        [Association("WarehouseArea-CargoOnArea"), Aggregated]
         public XPCollection<CargoOnArea> CargosOnArea                      // коллекция зарегистрированных на складе грузов
         {
             get { return GetCollection<CargoOnArea>(nameof(CargosOnArea)); }
@@ -300,6 +300,15 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     public class CargoOnArea : BaseObject
     {
         public CargoOnArea(Session session) : base(session) { }
+
+
+        uint weight;
+        public uint Weight
+        {
+            get { return weight; }
+            set { SetPropertyValue(nameof(Weight), ref weight, value); }
+
+        }
 
         DateTime loadedOn;
         public DateTime LoadedOn
