@@ -16,6 +16,8 @@ using DevExpress.Persistent.BaseImpl;
 using DevExpress.PivotGrid.Criteria.Validation;
 using DevExpress.Xpo;
 using DevExpress.Persistent.Validation;
+using DevExpress.XtraCharts;
+using System.Drawing;
 
 namespace WarehouseLogisticsEditor.Module.BusinessObjects
 {
@@ -121,7 +123,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         public DateTime CreatedOn
         {
             get { return createdOn; }
-            internal set { SetPropertyValue(nameof(CreatedOn), ref createdOn, value); }
+            set { SetPropertyValue(nameof(CreatedOn), ref createdOn, value); }
         }
         
 
@@ -196,13 +198,31 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
                 string tt = this.Warehouse.Oid.ToString();
                 // availablePegs.Criteria = CriteriaOperator.Parse("[Warehouse] == {8ba50e7a-ea71-41cc-87f1-e8ebfc228c73}");
                 //availablePegs.Criteria = CriteriaOperator.Parse($"[Warehouse] == {tt}");
+                DateTime gg = DateTime.Now;
                 availablePegs.Criteria = CriteriaOperator.FromLambda<WrehousePeg>(p => p.Warehouse.Oid == Warehouse.Oid);
+                availablePegs.Filter = CriteriaOperator.Parse("WarehouseArea[DeleteOn<?] | !WarehouseArea[].Exists()", CreatedOn ,this);
+              //  availablePegs.Criteria = CriteriaOperator.FromLambda(p=>WrehouseArea)
                 //  availablePegs = availablePegs.Where(p=> p.Warehouse = Warehouse.Oid) ;
             }
             else
             {
                 availablePegs.Criteria = null;
             }
+
+        /*    if (CreatedOn != null)
+            {
+                freeArea = new XPCollection<WrehouseArea>(Session);
+                freeArea.Criteria = CriteriaOperator.FromLambda<WrehouseArea>(p => p.DeleteOn < CreatedOn);
+                freePegs= new XPCollection<WrehousePeg>(Session);
+                freePegs.Criteria = CriteriaOperator.FromLambda<WrehousePeg>(p=>p.WarehouseArea.Criteria.Fr)
+                availablePegs = (XPCollection<WrehousePeg>)availablePegs.Except(freePegs);
+
+
+               // freePegs = new XPCollection<WrehousePeg>(Session).Where<WrehousePeg>(p=>p.WarehouseArea.);
+               // freePegs.Criteria = CriteriaOperator.FromLambda<WrehousePeg>(p => (p.WarehouseArea.Where<WrehouseArea>(p => p.DeleteOn < CreatedOn).FirstOrDefault()) == Warehouse.Oid); 
+            }*/
+
+
 
 
         }
@@ -212,11 +232,15 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             base.AfterConstruction();
             Warehouse = new Warehouse(Session);
             Warehouse = Session.FindObject<Warehouse>(CriteriaOperator.FromLambda<Warehouse>(p => p.WarehouseNumber >= 0));
-
+            
 
         }
 
         private XPCollection<AuditDataItemPersistent> auditTrail;
+        private XPCollection<WrehouseArea> freeArea;
+        private XPCollection<WrehousePeg> freePegs;
+
+
         [CollectionOperationSet(AllowAdd = false, AllowRemove = false)]
         public XPCollection<AuditDataItemPersistent> AuditTrail
         {
@@ -259,14 +283,14 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             set { SetPropertyValue(nameof(Warehouse), ref warehouse, value); }
         }
 
-        WrehouseArea wrehouseArea;            // ссылка на площадку
+      //  WrehouseArea wrehouseArea;            // ссылка на площадку
                                               //[DataSourceProperty("Department.Contacts")]
         [Association("WrehouseArea-WrehousePegs")]
-        public WrehouseArea WrehouseArea
+        public XPCollection <WrehouseArea> WarehouseArea
         {
 
-            get { return wrehouseArea; }
-            set { SetPropertyValue(nameof(WrehouseArea), ref wrehouseArea, value); }
+            get { return  GetCollection<WrehouseArea>(nameof(WarehouseArea));}
+            //set { SetPropertyValue(nameof(WrehouseArea), ref wrehouseArea, value); }
         }
     }
 
