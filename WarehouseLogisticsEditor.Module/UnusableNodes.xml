@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="WarehouseLogisticsEditor.Module.BusinessObjects.WrehouseArea">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="AreaName" LookupEditorMode="AllItems" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="WrehouseArea_ListView" AllowEdit="True" />
+  </Views>
+</Application>
