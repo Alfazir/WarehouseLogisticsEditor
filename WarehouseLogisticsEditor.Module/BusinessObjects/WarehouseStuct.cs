@@ -98,8 +98,6 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     [NavigationItem("WarehouseEditor")]
     [DefaultClassOptions]
     [RuleCriteria("Pegs.Count()-1 = Pegs.Max([PegNumber])-Pegs.Min([PegNumber])")]
-
-
     public class WarehouseArea : BaseObject              //
     {
 
