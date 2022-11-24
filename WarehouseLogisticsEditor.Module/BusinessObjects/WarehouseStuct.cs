@@ -34,23 +34,22 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         
         string warehouseName;
         [Size(128)]
-        public string WarehouseName                //TODO имя склада (произвольное). Позже наложим ограничения
+        public string WarehouseName                                                                        //Имя склада (произвольное). Позже наложим ограничения
         {
             get { return warehouseName; }
             set { SetPropertyValue(nameof(WarehouseName), ref warehouseName, value); }
         }
 
         
-        int warehouseNumber;                       //TODO  Номер склада. Позже наложим ограничения
+        int warehouseNumber;                                                                                //TODO  Номер склада. Позже наложим ограничения
 
-       //[RuleRequiredField(DefaultContexts.Save)]
         public int WarehouseNumber
         {
             get { return warehouseNumber; }
             set { SetPropertyValue(nameof(WarehouseNumber), ref warehouseNumber, value); }
         }
 
-        private int? warehousPegCount = null;      // количество пикетов на складе. Вычисляемое. 
+        private int? warehousPegCount = null;                                                                // количество пикетов на складе. Вычисляемое. 
         public int? WarehousPegCount
         {
             get
@@ -59,9 +58,8 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
                 (!IsLoading && !IsSaving && warehousPegCount == null)
                     UpdateWarehousPegCount(false); return warehousPegCount;
             }
-            // set { SetPropertyValue(nameof(WarehousPegCount), ref WarehousPegCount , value); }
         }
-        public void UpdateWarehousPegCount(bool forseChageEvents)  //UNDONE
+        public void UpdateWarehousPegCount(bool forseChageEvents)  
         {
             int? oldWarehousePegCount = warehousPegCount;
             warehousPegCount = Convert.ToInt32(Evaluate(CriteriaOperator.Parse("WarehousePegs.Count")));
@@ -73,15 +71,15 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
 
         [Association("Warehouse-WarehouseAreas")]
-        public XPCollection<WarehouseArea> WarehouseAreas                      // коллекция зарегистрированных на складе площадок
+        public XPCollection<WarehouseArea> WarehouseAreas                                                  // коллекция зарегистрированных на складе площадок
         {
             get { return GetCollection<WarehouseArea>(nameof(WarehouseAreas)); }
 
         }
 
-        [Association("Warehouse-WarehousePegs")] //, Aggregated, ExpandObjectMembers(ExpandObjectMembers.Never)]
+        [Association("Warehouse-WarehousePegs"), Aggregated] 
 
-        public XPCollection<WarehousePeg> WarehousePegs                      // коллекция зарегистрированных на складе пикетов
+        public XPCollection<WarehousePeg> WarehousePegs                                                      // коллекция зарегистрированных на складе пикетов
         {
             get { return GetCollection<WarehousePeg>(nameof(WarehousePegs)); }
             set { }
@@ -103,28 +101,18 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         public WarehouseArea(Session session) : base(session)
         {
-            // createdOn = DateTime.Now;                             //HACK установка даты (поменять алгоритм вычисления даты)
-
+        
         }
         string areaName;
 
-        public string AreaName                                    // имя площадки,- поменять на автоматически вычисляемое ( оставить алиас для удобства)
-        {
+        public string AreaName                                                                              // имя площадки,- поменять на автоматически вычисляемое ( оставить алиас для удобства)
+        { 
             get { return areaName; }
             set { SetPropertyValue(nameof(AreaName), ref areaName, value); }
         }
 
-
-
-        /*  int cargoOnArea;                                          // груз на площадке
-          public int CargoOnArea
-          {
-              get { return cargoOnArea; }
-              set { SetPropertyValue(nameof(CargoOnArea), ref cargoOnArea, value); }
-          }*/
-
         [Association("WarehouseArea-CargoOnArea"), Aggregated]
-        public XPCollection<CargoOnArea> CargosOnArea                      // коллекция зарегистрированных на складе грузов
+        public XPCollection<CargoOnArea> CargosOnArea                                                     // коллекция зарегистрированных на складе грузов
         {
             get { return GetCollection<CargoOnArea>(nameof(CargosOnArea)); }
             set { }
@@ -132,7 +120,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
 
 
-        DateTime createdOn; //HACK дата создания площадки.
+        DateTime createdOn;                                                                                // дата создания площадки.
         // [VisibleInListView(false)]
         [RuleRequiredField(DefaultContexts.Save)]
         public DateTime CreatedOn
@@ -141,7 +129,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             set { SetPropertyValue(nameof(CreatedOn), ref createdOn, value); }
         }
 
-        DateTime deleteOn;  //HACK дата удаления площадки.
+        DateTime deleteOn;                                                                                  // дата удаления площадки.
 
         [RuleRequiredField(DefaultContexts.Save)]
         public DateTime DeleteOn
@@ -151,7 +139,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
 
-        Warehouse warehouse;                         // ссылка на склад
+        Warehouse warehouse;                                                                                 // ссылка на склад
         [Association("Warehouse-WarehouseAreas")]
 
         public Warehouse Warehouse
@@ -171,30 +159,21 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         [Association("WarehouseArea-WarehousePegs")]
         [DataSourceProperty(nameof(AvailablePegs))]
-        //  [RuleValueComparison("RuleWithAggregateFunction", (DefaultContexts)ValueComparisonType.Equals, 0, DefaultContexts.Save, TargetPropertyName = nameof(WrehousePeg.PegNumber), TargetCollectionAggregate= Aggregate.Sum)]
         public XPCollection<WarehousePeg> Pegs
         {
             get
             {
-
                 return GetCollection<WarehousePeg>(nameof(Pegs));
             }
         }
 
-
         private XPCollection<WarehousePeg> availablePegs;
-        // [Association("WrehouseArea-WrehousePegs")]
-        //  [DataSourceProperty("Wrehouse.WrehouseAreas", DataSourcePropertyIsNullMode.SelectAll)]
+
         [Browsable(false)]
-        public XPCollection<WarehousePeg> AvailablePegs                      // коллекция зарегистрированных на складе площадок
+        public XPCollection<WarehousePeg> AvailablePegs                                                      // коллекция зарегистрированных на складе площадок
         {
             get
             {
-                //  XPCollection<WrehousePeg> CollectionPegs = GetCollection<WrehousePeg>(nameof(WrehousePegs));
-                //  CollectionPegs.Criteria = new BinaryOperator(nameof(WrehousePeg.Warehouse), this.Warehouse);
-                //return CollectionPegs;
-
-                //  return GetCollection<WrehousePeg>(nameof(WrehousePegs));
                 if (availablePegs == null)
                 {
                     availablePegs = new XPCollection<WarehousePeg>(Session);
@@ -204,21 +183,14 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
                 return availablePegs;
             }
         }
-        private void RefreshAvailablePegs()
+        private void RefreshAvailablePegs()                                                                 // обновление коллекции 
         {
             if (availablePegs == null)
                 return;
             if (Warehouse != null)
             {
-
-
-                // availablePegs.Criteria = CriteriaOperator.Parse("[Warehouse] == {8ba50e7a-ea71-41cc-87f1-e8ebfc228c73}");
-                //availablePegs.Criteria = CriteriaOperator.Parse($"[Warehouse] == {tt}");
-
                 availablePegs.Criteria = CriteriaOperator.FromLambda<WarehousePeg>(p => p.Warehouse.Oid == Warehouse.Oid);
                 availablePegs.Filter = CriteriaOperator.Parse("WarehouseArea[DeleteOn<?] | !WarehouseArea[].Exists()", CreatedOn, this);
-                //  availablePegs.Criteria = CriteriaOperator.FromLambda(p=>WrehouseArea)
-                //  availablePegs = availablePegs.Where(p=> p.Warehouse = Warehouse.Oid) ;
             }
             else
             {
@@ -226,13 +198,11 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             }
         }
 
-        public override void AfterConstruction()
-        {               // установка значения по умолчанию 
-            base.AfterConstruction();
-            Warehouse = new Warehouse(Session);
+        public override void AfterConstruction()                                                             // установка значения по умолчанию 
+        {              
+            base.AfterConstruction(); 
             Warehouse = Session.FindObject<Warehouse>(CriteriaOperator.FromLambda<Warehouse>(p => p.WarehouseNumber >= 0));
-
-
+    
         }
 
         private XPCollection<AuditDataItemPersistent> auditTrail;
@@ -262,15 +232,19 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     [NavigationItem("WarehouseEditor")]
     public class WarehousePeg : BaseObject
     {
-        public WarehousePeg(Session session) : base(session) { }
+        public WarehousePeg(Session session) : base(session) {
 
-        int pegNumber;
-        //[PersistentAlias("Warehouse.warehouseNumber* 100 + Warehouse.WarehousPegCount")]                 // 
-        public int PegNumber                                   //TODO номер пикета. Будет вычисляться при создании. Определиться с обновлением значения??
+        }
+
+        private int? pegNumber = null;
+       // [PersistentAlias("Warehouse.warehouseNumber*100 + Warehouse.WarehousPegCount")]                 // 
+
+        [Persistent("PegNumber")]
+        public int? PegNumber                                                                //TODO номер пикета. Будет вычисляться при создании.
         {
             get { return pegNumber; }
-            //get { return (int) (EvaluateAlias(nameof (PegNumber)) ?? 0) ; }
             set { SetPropertyValue(nameof(PegNumber), ref pegNumber, value); }
+
         }
 
         Warehouse warehouse;                   // ссылка на склад
@@ -281,26 +255,25 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             set { SetPropertyValue(nameof(Warehouse), ref warehouse, value); }
         }
 
-        //  WrehouseArea wrehouseArea;            // ссылка на площадку
-        //[DataSourceProperty("Department.Contacts")]
+
         [Association("WarehouseArea-WarehousePegs")]
         public XPCollection<WarehouseArea> WarehouseArea
         {
-
             get { return GetCollection<WarehouseArea>(nameof(WarehouseArea)); }
-            //set { SetPropertyValue(nameof(WrehouseArea), ref wrehouseArea, value); }
         }
+
     }
 
     #endregion
 
-    #region  Груз на площадке
+    #region  Груз на площадке                                             
+    [DefaultClassOptions]
     public class CargoOnArea : BaseObject
     {
         public CargoOnArea(Session session) : base(session) { }
 
 
-        uint weight;
+        uint weight;                                                                      //Вес груза.
         public uint Weight
         {
             get { return weight; }

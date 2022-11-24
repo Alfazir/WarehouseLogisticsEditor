@@ -5,6 +5,11 @@
   </BOModel>
   <NavigationItems>
     <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="CargoOnArea_ListView" Removed="True" />
+        </Items>
+      </Item>
       <Item Id="Reports" Visible="False">
         <Items>
           <Item Id="Analysis_ListView" Visible="False" />
@@ -22,8 +27,11 @@
           <Item Id="Warehouse_ListView" Removed="True" />
           <Item Id="WarehouseArea_ListView">
             <Items>
-              <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" IsNewNode="True" />
-              <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
+              <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" IsNewNode="True">
+                <Items IsNewNode="True">
+                  <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
+                </Items>
+              </Item>
             </Items>
           </Item>
           <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" Removed="True" />

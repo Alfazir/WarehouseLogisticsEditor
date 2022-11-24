@@ -732,13 +732,13 @@
   </Localization>
   <NavigationItems>
     <Items>
-      <Item Id="WarehouseEditor">
+      <Item Id="Reports" Caption="Отчёты" />
+      <Item Id="WarehouseEditor" Caption="Планировщик площадок складов">
         <Items>
           <Item Id="Dashboards" Caption="Панель мониторинга" />
-          <Item Id="WarehouseArea_ListView" Caption="Площадки складов">
+          <Item Id="WarehouseArea_ListView" Caption="Регистрация площадок">
             <Items>
               <Item Id="Warehouse_ListView" Caption="Склады" />
-              <Item Id="WarehousePeg_ListView" Caption="Пикеты" />
             </Items>
           </Item>
         </Items>
@@ -1167,14 +1167,15 @@
     </ListView>
     <DetailView Id="CargoOnArea_DetailView" Caption="Грузы (т)">
       <Items>
-        <PropertyEditor Id="LoadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <PropertyEditor Id="LoadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации груза:" />
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="UnloadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <PropertyEditor Id="UnloadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата отгрузки:" />
+        <PropertyEditor Id="Weight" Caption="Вес груза:" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" ToolTip="" ToolTipTitle="">
           <LayoutGroup Id="SimpleEditors" ToolTip="" ToolTipTitle="">
-            <LayoutGroup Id="CargoOnArea" ToolTip="" ToolTipTitle="">
+            <LayoutGroup Id="CargoOnArea" ToolTip="" ToolTipTitle="" Caption="Груз на площадке(т):">
               <LayoutItem Id="LoadedOn" ToolTipTitle="" />
               <LayoutItem Id="UnloadedOn" ToolTipTitle="" />
             </LayoutGroup>
@@ -5952,15 +5953,15 @@
       <Items>
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
         <PropertyEditor Id="WarehouseAreas" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Площадки склада:" />
-        <PropertyEditor Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="WarehouseNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер склада" />
-        <PropertyEditor Id="WarehousePegs" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Пикеты склада" />
-        <PropertyEditor Id="WarehousPegCount" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Количество пикетов на складе" />
+        <PropertyEditor Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование склада:" />
+        <PropertyEditor Id="WarehouseNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер склада:" />
+        <PropertyEditor Id="WarehousePegs" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Пикеты склада:" />
+        <PropertyEditor Id="WarehousPegCount" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Количество пикетов на складе:" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" ToolTip="" ToolTipTitle="">
           <LayoutGroup Id="SimpleEditors" ToolTip="" ToolTipTitle="">
-            <LayoutGroup Id="Warehouse" ToolTip="" ToolTipTitle="">
+            <LayoutGroup Id="Warehouse" ToolTip="" ToolTipTitle="" Caption="Склад">
               <LayoutItem Id="WarehouseName" ToolTipTitle="" />
               <LayoutItem Id="WarehouseNumber" ToolTipTitle="" />
               <LayoutItem Id="WarehousPegCount" ToolTipTitle="" />
@@ -5980,7 +5981,7 @@
     <ListView Id="Warehouse_ListView" Caption="Склады">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование склада:" />
         <ColumnInfo Id="WarehouseNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер склада:" />
         <ColumnInfo Id="WarehousPegCount" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Количество пикетов на складе:" />
       </Columns>
@@ -5989,7 +5990,7 @@
     </ListView>
     <ListView Id="Warehouse_LookupListView" Caption="Склады">
       <Columns>
-        <ColumnInfo Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="WarehouseName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование складов:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -5997,10 +5998,10 @@
     <ListView Id="Warehouse_WarehouseAreas_ListView" Caption="Площадки складов">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
+        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование площадок:" />
+        <ColumnInfo Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации:" />
+        <ColumnInfo Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата окончания регистрации:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6008,8 +6009,8 @@
     <ListView Id="Warehouse_WarehousePegs_ListView" Caption="Пикеты">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
+        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6041,14 +6042,14 @@
     </ListView>
     <DetailView Id="WarehouseArea_DetailView" Caption="Площадка склада">
       <Items>
-        <PropertyEditor Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="AuditTrail" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="CargosOnArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <PropertyEditor Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование площадки:" />
+        <PropertyEditor Id="AuditTrail" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Аудит:" />
+        <PropertyEditor Id="CargosOnArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Грузы на площадке:" />
+        <PropertyEditor Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации площадки:" />
+        <PropertyEditor Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата окончания регистрации:" />
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="Pegs" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <PropertyEditor Id="Pegs" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Пикиты площадки:" />
+        <PropertyEditor Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" ToolTip="" ToolTipTitle="">
@@ -6077,17 +6078,17 @@
     <ListView Id="WarehouseArea_ListView" Caption="Площадки складов">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование площадки:" />
+        <ColumnInfo Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации площадки:" />
+        <ColumnInfo Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата окончания регистрации:" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
     </ListView>
     <ListView Id="WarehouseArea_LookupListView" Caption="Площадки складов">
       <Columns>
-        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование площадки:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6095,8 +6096,8 @@
     <ListView Id="WarehouseArea_Pegs_ListView" Caption="Пикеты">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6104,9 +6105,9 @@
     <DetailView Id="WarehousePeg_DetailView" Caption="Пикет">
       <Items>
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <PropertyEditor Id="WarehouseArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <PropertyEditor Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
+        <PropertyEditor Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
+        <PropertyEditor Id="WarehouseArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Площадки:" />
       </Items>
       <Layout>
         <LayoutGroup Id="Main" ToolTip="" ToolTipTitle="">
@@ -6125,8 +6126,8 @@
     <ListView Id="WarehousePeg_ListView" Caption="Пикеты">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6134,8 +6135,8 @@
     <ListView Id="WarehousePeg_LookupListView" Caption="Пикеты">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
+        <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
       </Columns>
       <ChartSettings Settings="" />
       <PivotSettings Settings="" LayoutSettings="" ChartSettings="" />
@@ -6143,7 +6144,7 @@
     <ListView Id="WarehousePeg_WarehouseArea_ListView" Caption="Площадки складов">
       <Columns>
         <ColumnInfo Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
-        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
+        <ColumnInfo Id="AreaName" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Наименование площадки:" />
         <ColumnInfo Id="CreatedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации:" />
         <ColumnInfo Id="DeleteOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата закрытия регистрации:" />
         <ColumnInfo Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад" />
