@@ -21,17 +21,13 @@
       </Item>
       <Item Id="WarehouseEditor">
         <Items>
-          <Item Id="Dashboards" ObjectKey="" ViewId="DashboardData_ListView" Visible="True" IsNewNode="True">
+          <Item Id="WarehouseArea_ListView" ObjectKey="" ViewId="WarehouseArea_ListView" Index="0" IsNewNode="True" Removed="True" />
+          <Item Id="Dashboards" ObjectKey="" ViewId="DashboardData_ListView" Visible="True" Index="1" IsNewNode="True">
             <Items Index="" IsNewNode="True" />
           </Item>
-          <Item Id="Warehouse_ListView" Removed="True" />
-          <Item Id="WarehouseArea_ListView">
-            <Items>
-              <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" IsNewNode="True">
-                <Items IsNewNode="True">
-                  <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
-                </Items>
-              </Item>
+          <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" Index="2" IsNewNode="True" Removed="True">
+            <Items IsNewNode="True">
+              <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
             </Items>
           </Item>
           <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" Removed="True" />
@@ -49,5 +45,11 @@
   </SchemaModules>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <DetailView Id="WarehousePeg_DetailView">
+      <Items>
+        <PropertyEditor Id="PegNumber" AllowEdit="False" />
+        <PropertyEditor Id="WarehouseArea" AllowEdit="False" />
+      </Items>
+    </DetailView>
   </Views>
 </Application>

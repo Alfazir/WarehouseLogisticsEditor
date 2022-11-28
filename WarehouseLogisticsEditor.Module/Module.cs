@@ -13,8 +13,23 @@ using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.Xpo;
 using DevExpress.ExpressApp.Xpo;
+using System;
+using System.Collections.Generic;
 
-namespace WarehouseLogisticsEditor.Module;
+using DevExpress.ExpressApp;
+using System.Reflection;
+
+namespace WarehouseLogisticsEditor.Module /*{
+    public sealed partial class WarehouseLogisticsEditorModul:ModuleBase
+    {
+        public WarehouseLogisticsEditorModul()
+        {
+            InitializeComponent();
+        }
+    }
+
+}*/
+;
 
 // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ModuleBase.
 public sealed class WarehouseLogisticsEditorModule : ModuleBase {
@@ -43,6 +58,10 @@ public sealed class WarehouseLogisticsEditorModule : ModuleBase {
 		RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.TreeListEditors.TreeListEditorsModuleBase));
 		RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Validation.ValidationModule));
 		RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.ViewVariantsModule.ViewVariantsModule));
+
+
+
+
     }
     public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB) {
         ModuleUpdater updater = new DatabaseUpdate.Updater(objectSpace, versionFromDB);

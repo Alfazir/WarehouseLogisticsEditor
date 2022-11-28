@@ -735,12 +735,8 @@
       <Item Id="Reports" Caption="Отчёты" />
       <Item Id="WarehouseEditor" Caption="Планировщик площадок складов">
         <Items>
+          <Item Id="WarehouseArea_ListView" Caption="Регистрация площадок" />
           <Item Id="Dashboards" Caption="Панель мониторинга" />
-          <Item Id="WarehouseArea_ListView" Caption="Регистрация площадок">
-            <Items>
-              <Item Id="Warehouse_ListView" Caption="Склады" />
-            </Items>
-          </Item>
         </Items>
       </Item>
     </Items>
@@ -6106,7 +6102,6 @@
       <Items>
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
         <PropertyEditor Id="PegNumber" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Номер пикета:" />
-        <PropertyEditor Id="Warehouse" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Склад:" />
         <PropertyEditor Id="WarehouseArea" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Площадки:" />
       </Items>
       <Layout>
@@ -6114,7 +6109,6 @@
           <LayoutGroup Id="SimpleEditors" ToolTip="" ToolTipTitle="">
             <LayoutGroup Id="WarehousePeg" ToolTip="" ToolTipTitle="">
               <LayoutItem Id="PegNumber" ToolTipTitle="" />
-              <LayoutItem Id="Warehouse" ToolTipTitle="" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="WarehouseArea_Group" ToolTipTitle="">

@@ -230,17 +230,18 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     #region Пикеты на складе
 
     [NavigationItem("WarehouseEditor")]
+    [RuleCombinationOfPropertiesIsUnique("f", DefaultContexts.Save, "PegNumber, warehouse")]
     public class WarehousePeg : BaseObject
     {
         public WarehousePeg(Session session) : base(session) {
 
         }
 
-        private int? pegNumber = null;
+        private uint? pegNumber = null;
        // [PersistentAlias("Warehouse.warehouseNumber*100 + Warehouse.WarehousPegCount")]                 // 
 
         [Persistent("PegNumber")]
-        public int? PegNumber                                                                //TODO номер пикета. Будет вычисляться при создании.
+        public uint? PegNumber                                                                //TODO номер пикета. Будет вычисляться при создании.
         {
             get { return pegNumber; }
             set { SetPropertyValue(nameof(PegNumber), ref pegNumber, value); }
