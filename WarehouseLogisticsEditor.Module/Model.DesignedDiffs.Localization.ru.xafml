@@ -1163,6 +1163,7 @@
     </ListView>
     <DetailView Id="CargoOnArea_DetailView" Caption="Грузы (т)">
       <Items>
+        <PropertyEditor Id="IsIntervalFree" Caption="Площадка свободна:" />
         <PropertyEditor Id="LoadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата регистрации груза:" />
         <PropertyEditor Id="Oid" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" />
         <PropertyEditor Id="UnloadedOn" CaptionForTrue="" CaptionForFalse="" PredefinedValues="" NullText="" Caption="Дата отгрузки:" />

@@ -18,6 +18,7 @@ using DevExpress.Xpo;
 using DevExpress.Persistent.Validation;
 using DevExpress.XtraCharts;
 using System.Drawing;
+using DevExpress.Map.Native;
 
 namespace WarehouseLogisticsEditor.Module.BusinessObjects
 {
@@ -31,7 +32,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     {
 
         public Warehouse(Session session) : base(session) { }
-        
+
         string warehouseName;
         [Size(128)]
         public string WarehouseName                                                                        //Имя склада (произвольное). Позже наложим ограничения
@@ -40,7 +41,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
             set { SetPropertyValue(nameof(WarehouseName), ref warehouseName, value); }
         }
 
-        
+
         int warehouseNumber;                                                                                //TODO  Номер склада. Позже наложим ограничения
 
         public int WarehouseNumber
@@ -59,7 +60,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
                     UpdateWarehousPegCount(false); return warehousPegCount;
             }
         }
-        public void UpdateWarehousPegCount(bool forseChageEvents)  
+        public void UpdateWarehousPegCount(bool forseChageEvents)
         {
             int? oldWarehousePegCount = warehousPegCount;
             warehousPegCount = Convert.ToInt32(Evaluate(CriteriaOperator.Parse("WarehousePegs.Count")));
@@ -77,7 +78,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         }
 
-        [Association("Warehouse-WarehousePegs"), Aggregated] 
+        [Association("Warehouse-WarehousePegs"), Aggregated]
 
         public XPCollection<WarehousePeg> WarehousePegs                                                      // коллекция зарегистрированных на складе пикетов
         {
@@ -101,12 +102,12 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
 
         public WarehouseArea(Session session) : base(session)
         {
-        
+
         }
         string areaName;
 
         public string AreaName                                                                              // имя площадки,- поменять на автоматически вычисляемое ( оставить алиас для удобства)
-        { 
+        {
             get { return areaName; }
             set { SetPropertyValue(nameof(AreaName), ref areaName, value); }
         }
@@ -199,10 +200,10 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
         public override void AfterConstruction()                                                             // установка значения по умолчанию 
-        {              
-            base.AfterConstruction(); 
+        {
+            base.AfterConstruction();
             Warehouse = Session.FindObject<Warehouse>(CriteriaOperator.FromLambda<Warehouse>(p => p.WarehouseNumber >= 0));
-    
+
         }
 
         private XPCollection<AuditDataItemPersistent> auditTrail;
@@ -233,12 +234,13 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
     [RuleCombinationOfPropertiesIsUnique("f", DefaultContexts.Save, "PegNumber, warehouse")]
     public class WarehousePeg : BaseObject
     {
-        public WarehousePeg(Session session) : base(session) {
+        public WarehousePeg(Session session) : base(session)
+        {
 
         }
 
         private uint? pegNumber = null;
-       // [PersistentAlias("Warehouse.warehouseNumber*100 + Warehouse.WarehousPegCount")]                 // 
+        // [PersistentAlias("Warehouse.warehouseNumber*100 + Warehouse.WarehousPegCount")]                 // 
 
         [Persistent("PegNumber")]
         public uint? PegNumber                                                                //TODO номер пикета. Будет вычисляться при создании.
@@ -283,6 +285,7 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
         DateTime loadedOn;
+        [RuleRequiredField(DefaultContexts.Save)]
         public DateTime LoadedOn
         {
             get { return loadedOn; }
@@ -290,11 +293,40 @@ namespace WarehouseLogisticsEditor.Module.BusinessObjects
         }
 
         DateTime unloadedOn;
+        [RuleRequiredField(DefaultContexts.Save)]
         public DateTime UnloadedOn
         {
             get { return unloadedOn; }
             set { SetPropertyValue(nameof(UnloadedOn), ref unloadedOn, value); }
         }
+
+        [RuleFromBoolProperty("OverlapTimeInterval", DefaultContexts.Save,
+      "Площадка занята в указанный временной  интервал! Укажите другой интервал!", UsedProperties = "LoadedOn,UnloadedOn")]           //  правило для проверки пересечения интервалов при регистрации груза.             
+        public bool IsIntervalFree
+        {
+            get
+            {
+                XPCollection<CargoOnArea> availableCargos = new XPCollection<CargoOnArea>(PersistentCriteriaEvaluationBehavior.BeforeTransaction,
+                Session, new BinaryOperator("WarehouseArea.Oid", WarehouseArea.Oid, DevExpress.Data.Filtering.BinaryOperatorType.Equal));
+
+               
+                    foreach (CargoOnArea Cargo in availableCargos)
+                {
+                    if (Cargo.Oid != this.Oid) { 
+                     if (!(LoadedOn > Cargo.UnloadedOn | UnloadedOn < Cargo.LoadedOn))
+                    { return false; }
+                    }
+                }
+
+
+
+                return true;
+            }
+
+
+
+        }
+
 
         WarehouseArea warehouseArea;
         [Association("WarehouseArea-CargoOnArea")]
