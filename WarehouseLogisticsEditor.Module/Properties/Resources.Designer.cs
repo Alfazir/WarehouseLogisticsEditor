@@ -65,7 +65,7 @@ namespace WarehouseLogisticsEditor.Module.Properties {
         ///  &lt;Title Text=&quot;Warehouse monitoring&quot; /&gt;
         ///  &lt;DataSources&gt;
         ///    &lt;ObjectDataSource Name=&quot;Warehouse Area&quot; ComponentName=&quot;objectDataSource1&quot;&gt;
-        ///      &lt;DataSource Type=&quot;WarehouseLogisticsEditor.Module.BusinessObjects.WarehouseArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.34503, Culture=neutral, PublicKeyToken=null&quot; /&gt;
+        ///      &lt;DataSource Type=&quot;WarehouseLogisticsEditor.Module.BusinessObjects.WarehouseArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.35587, Culture=neutral, PublicKeyToken=null&quot; /&gt;
         ///    &lt;/ObjectDataSource&gt;
         ///    &lt;ObjectDataSource Name=&quot;Cargo On Area&quot; ComponentName=&quot;objectDataSource2&quot;&gt;
         ///      &lt;DataSource Type=&quot;WarehouseLogisticsEditor.M [rest of string was truncated]&quot;;.

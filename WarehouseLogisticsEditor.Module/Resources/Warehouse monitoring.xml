@@ -2,10 +2,10 @@
   <Title Text="Warehouse monitoring" />
   <DataSources>
     <ObjectDataSource Name="Warehouse Area" ComponentName="objectDataSource1">
-      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.WarehouseArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.34503, Culture=neutral, PublicKeyToken=null" />
+      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.WarehouseArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.35587, Culture=neutral, PublicKeyToken=null" />
     </ObjectDataSource>
     <ObjectDataSource Name="Cargo On Area" ComponentName="objectDataSource2">
-      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.CargoOnArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.34503, Culture=neutral, PublicKeyToken=null" />
+      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.CargoOnArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.35587, Culture=neutral, PublicKeyToken=null" />
     </ObjectDataSource>
   </DataSources>
   <Parameters>
@@ -20,13 +20,6 @@
         <Dimension DataMember="WarehouseArea.DeleteOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem2" />
         <Dimension DataMember="WarehouseArea.Warehouse.WarehouseName" DefaultId="DataItem3" />
       </DataItems>
-      <FormatRules>
-        <GridItemFormatRule Name="Format Rule 1" ApplyToRow="true" DataItem="DataItem2">
-          <FormatConditionDateOccurring DateType="Yesterday, LastWeek, ThisWeek, ThisMonth, MonthAfter1, MonthAgo1">
-            <AppearanceSettings AppearanceType="PaleRed" />
-          </FormatConditionDateOccurring>
-        </GridItemFormatRule>
-      </FormatRules>
       <GridColumns>
         <GridDimensionColumn>
           <Dimension DefaultId="DataItem1" />
