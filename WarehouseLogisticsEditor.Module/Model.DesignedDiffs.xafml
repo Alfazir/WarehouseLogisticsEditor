@@ -45,11 +45,13 @@
   </SchemaModules>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <ListView Id="WarehouseArea_Pegs_ListView" AllowDelete="False" AllowEdit="True" AllowNew="False" AllowLink="True" AllowUnlink="True" />
     <DetailView Id="WarehousePeg_DetailView">
       <Items>
         <PropertyEditor Id="PegNumber" AllowEdit="False" />
         <PropertyEditor Id="WarehouseArea" AllowEdit="False" />
       </Items>
     </DetailView>
+    <ListView Id="WarehousePeg_WarehouseArea_ListView" AllowDelete="False" AllowEdit="True" AllowNew="False" AllowLink="True" AllowUnlink="True" />
   </Views>
 </Application>
