@@ -3,7 +3,7 @@
   <ActionDesign>
     <Actions>
       <Action Id="BindAnalysisData" ConfirmationMessage="" />
-      <Action Id="Cancel" ConfirmationMessage="" />
+      <Action Id="Cancel" ConfirmationMessage="" Caption="Закрыть" />
       <Action Id="CancelAction" ConfirmationMessage="" />
       <Action Id="ChangePasswordByUser" ConfirmationMessage="" />
       <Action Id="ChangeVariant" ConfirmationMessage="" />
@@ -12,6 +12,8 @@
       <Action Id="CopyPredefinedReport" ConfirmationMessage="" />
       <Action Id="CreateDashboard" ConfirmationMessage="" />
       <Action Id="CreateModelDifferences" ConfirmationMessage="" />
+      <Action Id="Delete" Caption="Удалить" />
+      <Action Id="Delete Item" Caption="Удалить объект" />
       <Action Id="DeleteDashboard" ConfirmationMessage="" />
       <Action Id="Diagnostic Info" ConfirmationMessage="" />
       <Action Id="Diagnostic Info.Actions Info" ConfirmationMessage="" />
