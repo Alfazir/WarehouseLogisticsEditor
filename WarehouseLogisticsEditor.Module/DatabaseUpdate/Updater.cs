@@ -10,6 +10,8 @@ using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.BaseImpl.PermissionPolicy;
 using WarehouseLogisticsEditor.Module.BusinessObjects;
+using DevExpress.ExpressApp.Dashboards;
+using WarehouseLogisticsEditor.Module.Properties;
 
 namespace WarehouseLogisticsEditor.Module.DatabaseUpdate;
 
@@ -22,6 +24,8 @@ public class Updater : ModuleUpdater {
         base.UpdateDatabaseAfterUpdateSchema();
         Warehouse warehouse = ObjectSpace.FirstOrDefault<Warehouse>(warehouse => warehouse.WarehouseName == "Склад №1" & warehouse.WarehouseNumber == 1);
 
+        DashboardsModule.AddDashboardData<DashboardData>(
+        ObjectSpace, "My Dashboard", Resources.Warehouse_monitoring);
 
 
 

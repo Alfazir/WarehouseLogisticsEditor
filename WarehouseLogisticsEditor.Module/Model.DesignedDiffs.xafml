@@ -12,20 +12,18 @@
       </Item>
       <Item Id="Reports" Visible="False">
         <Items>
-          <Item Id="Analysis_ListView" Visible="False" />
-          <Item Id="Dashboards" Removed="True">
-            <Items Index="" />
+          <Item Id="Dashboards" ObjectKey="" ViewId="DashboardData_ListView" Index="2" IsNewNode="True" Removed="True">
+            <Items Index="" IsNewNode="True" />
           </Item>
+          <Item Id="Analysis_ListView" Visible="False" />
           <Item Id="ReportsV2" Visible="False" />
         </Items>
       </Item>
       <Item Id="WarehouseEditor">
         <Items>
-          <Item Id="WarehouseArea_ListView" ObjectKey="" ViewId="WarehouseArea_ListView" Index="0" IsNewNode="True" Removed="True" />
-          <Item Id="Dashboards" ObjectKey="" ViewId="DashboardData_ListView" Visible="True" Index="1" IsNewNode="True">
-            <Items Index="" IsNewNode="True" />
-          </Item>
-          <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" Index="2" IsNewNode="True" Removed="True">
+          <DashboardNavigationItem Id="@65fd7222-bc81-466a-8add-3b83efcb8cf6" DashboardTitle="Warehouse monitoring" Index="0" IsNewNode="True" />
+          <Item Id="WarehouseArea_ListView" ObjectKey="" ViewId="WarehouseArea_ListView" Index="1" IsNewNode="True" Removed="True" />
+          <Item Id="Warehouse_ListView" ViewId="Warehouse_ListView" ObjectKey="" Index="3" IsNewNode="True" Removed="True">
             <Items IsNewNode="True">
               <Item Id="WarehousePeg_ListView" ViewId="WarehousePeg_ListView" ObjectKey="" IsNewNode="True" />
             </Items>

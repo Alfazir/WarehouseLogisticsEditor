@@ -23,6 +23,7 @@
       <Action Id="ExportModelDifferences" ConfirmationMessage="" />
       <Action Id="FullTextSearch" ConfirmationMessage="" />
       <Action Id="HideItemsFromDashboard" ConfirmationMessage="" />
+      <Action Id="Link" Caption="Прикрепить" />
       <Action Id="ListViewShowObject" ConfirmationMessage="" />
       <Action Id="Logoff" ConfirmationMessage="" />
       <Action Id="Logon" ConfirmationMessage="" />
@@ -30,13 +31,14 @@
       <Action Id="MyDetails" ConfirmationMessage="" />
       <Action Id="NavigateBack" ConfirmationMessage="" />
       <Action Id="NavigateForward" ConfirmationMessage="" />
-      <Action Id="New" ConfirmationMessage="" />
+      <Action Id="New" ConfirmationMessage="" Caption="Добавить" />
       <Action Id="OrganizeDashboard" ConfirmationMessage="" />
       <Action Id="PreviewReportV2" ConfirmationMessage="" />
+      <Action Id="Refresh" Caption="Обновить" />
       <Action Id="RefreshAction" ConfirmationMessage="" />
       <Action Id="ReportViewerDialogControllerV2_Close" ConfirmationMessage="" />
       <Action Id="ResetPassword" ConfirmationMessage="" />
-      <Action Id="Save" ConfirmationMessage="" />
+      <Action Id="Save" ConfirmationMessage="" Caption="Сохранить" />
       <Action Id="SaveAndClose" ConfirmationMessage="" />
       <Action Id="SaveAndNew" ConfirmationMessage="" />
       <Action Id="SetFilter" ConfirmationMessage="" />
@@ -45,6 +47,7 @@
       <Action Id="ShowItemsOnDashboard" ConfirmationMessage="" />
       <Action Id="ShowNavigationItem" ConfirmationMessage="" />
       <Action Id="UnbindAnalysisData" ConfirmationMessage="" />
+      <Action Id="Unlink" Caption="Открепить" />
     </Actions>
   </ActionDesign>
   <BOModel>
@@ -732,11 +735,15 @@
   </Localization>
   <NavigationItems>
     <Items>
-      <Item Id="Reports" Caption="Отчёты" />
+      <Item Id="Reports" Caption="Отчёты">
+        <Items>
+          <Item Id="Dashboards" Caption="Панель мониторинга" />
+        </Items>
+      </Item>
       <Item Id="WarehouseEditor" Caption="Планировщик площадок складов">
         <Items>
+          <DashboardNavigationItem Id="@65fd7222-bc81-466a-8add-3b83efcb8cf6" Caption="Мониторинг складов" />
           <Item Id="WarehouseArea_ListView" Caption="Регистрация площадок" />
-          <Item Id="Dashboards" Caption="Панель мониторинга" />
         </Items>
       </Item>
     </Items>

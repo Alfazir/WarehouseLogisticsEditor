@@ -1,0 +1,99 @@
+<Dashboard CurrencyCulture="ru">
+  <Title Text="Warehouse monitoring" />
+  <DataSources>
+    <ObjectDataSource Name="Warehouse Area" ComponentName="objectDataSource1">
+      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.WarehouseArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.34503, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource Name="Cargo On Area" ComponentName="objectDataSource2">
+      <DataSource Type="WarehouseLogisticsEditor.Module.BusinessObjects.CargoOnArea, WarehouseLogisticsEditor.Module, Version=1.0.8369.34503, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="Parameter1" />
+  </Parameters>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Площадки складов" DataSource="objectDataSource2">
+      <InteractivityOptions MasterFilterMode="Single" />
+      <DataItems>
+        <Dimension DataMember="WarehouseArea.AreaName" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem1" />
+        <Dimension DataMember="WarehouseArea.CreatedOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+        <Dimension DataMember="WarehouseArea.DeleteOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem2" />
+        <Dimension DataMember="WarehouseArea.Warehouse.WarehouseName" DefaultId="DataItem3" />
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="Format Rule 1" ApplyToRow="true" DataItem="DataItem2">
+          <FormatConditionDateOccurring DateType="Yesterday, LastWeek, ThisWeek, ThisMonth, MonthAfter1, MonthAgo1">
+            <AppearanceSettings AppearanceType="PaleRed" />
+          </FormatConditionDateOccurring>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem3" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions />
+      <ColumnFilterOptions />
+    </Grid>
+    <DateFilter ComponentName="dateFilterDashboardItem1" Name="Date Filter 1" DataSource="objectDataSource1" />
+    <DateFilter ComponentName="dateFilterDashboardItem2" Name="Задайте интервал для выбора площадок:" DataSource="objectDataSource2" IsMasterFilterCrossDataSource="true" FilterType="After">
+      <DataItems>
+        <Dimension DataMember="WarehouseArea.CreatedOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+      </DataItems>
+      <Dimension DefaultId="DataItem0" />
+    </DateFilter>
+    <DateFilter ComponentName="dateFilterDashboardItem3" Name="Дата окончания регистрации" ShowCaption="false" DataSource="objectDataSource2" IsMasterFilterCrossDataSource="true" FilterType="Before">
+      <DataItems>
+        <Dimension DataMember="WarehouseArea.DeleteOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+      </DataItems>
+      <Dimension DefaultId="DataItem0" />
+    </DateFilter>
+    <Grid ComponentName="gridDashboardItem3" Name="Грузы на складе" DataSource="objectDataSource2">
+      <DataItems>
+        <Dimension DataMember="Weight" DefaultId="DataItem1" />
+        <Dimension DataMember="LoadedOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+        <Dimension DataMember="UnloadedOn" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem2" />
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="Format Rule 1">
+          <FormatConditionValue Condition="Greater">
+            <AppearanceSettings AppearanceType="PaleBlue" />
+            <Value1 Type="System.Int32" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions />
+      <ColumnFilterOptions UpdateTotals="true" />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="1.0359281437125747">
+        <LayoutItem DashboardItem="dateFilterDashboardItem2" Weight="0.5543644716692189" />
+        <LayoutItem DashboardItem="dateFilterDashboardItem3" Weight="0.9574459628490934" />
+        <LayoutItem DashboardItem="gridDashboardItem3" Weight="1.4881895654816877" />
+      </LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" Weight="0.9640718562874252" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
